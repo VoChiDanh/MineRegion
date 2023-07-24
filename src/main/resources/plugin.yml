@@ -1,0 +1,13 @@
+name: MineRegion
+version: '${project.version}'
+main: net.danh.mineregion.MineRegion
+api-version: '1.13'
+depend:
+  - WorldGuard
+  - PlaceholderAPI
+commands:
+  mr:
+    description: MineRegion Command
+    aliases:
+      - mineregion
+      - mregion

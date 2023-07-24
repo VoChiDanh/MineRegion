@@ -1,0 +1,128 @@
+block:
+  COBBLESTONE:
+    max_number: 70
+    regen:
+      - COAL_ORE;5
+      - STONE;30
+      - COBBLESTONE;60
+    time_regen: 20
+    replace: BEDROCK
+    amount: 1
+    command:
+      - "mi give MATERIAL COBBLESTONE %player_name% #amount# 0 100 0 silent"
+  STONE:
+    max_number: 100
+    regen:
+      - COAL_ORE;30
+      - STONE;60
+      - COBBLESTONE;90
+    time_regen: 20
+    replace: BEDROCK
+    amount: 2-4
+    command:
+      - "mi give MATERIAL COBBLESTONE %player_name% #amount# 0 100 0 silent"
+  COAL_ORE:
+    max_number: 100
+    regen:
+      - IRON_ORE;5
+      - COAL_ORE;30
+      - STONE;60
+      - COBBLESTONE;90
+    time_regen: 20
+    replace: BEDROCK
+    amount: 1
+    command:
+      - "mi give MATERIAL COAL %player_name% #amount# 0 100 0 silent"
+  IRON_ORE:
+    max_number: 150
+    regen:
+      - GOLD_ORE;5
+      - IRON_ORE;30
+      - COAL_ORE;60
+      - STONE;90
+      - COBBLESTONE;120
+    time_regen: 20
+    replace: BEDROCK
+    amount: 1
+    command:
+      - "mi give MATERIAL IRON_INGOT %player_name% #amount# 0 100 0 silent"
+  GOLD_ORE:
+    max_number: 200
+    regen:
+      - DIAMOND_ORE;5
+      - GOLD_ORE;30
+      - IRON_ORE;60
+      - COAL_ORE;90
+      - STONE;120
+      - COBBLESTONE;150
+    time_regen: 20
+    replace: BEDROCK
+    amount: 1
+    command:
+      - "mi give MATERIAL GOLD_INGOT %player_name% #amount# 0 100 0 silent"
+  DIAMOND:
+    max_number: 230
+    regen:
+      - EMERALD_ORE;5
+      - DIAMOND_ORE;30
+      - GOLD_ORE;60
+      - IRON_ORE;90
+      - COAL_ORE;120
+      - STONE;150
+      - COBBLESTONE;180
+    time_regen: 20
+    replace: BEDROCK
+    amount: 1
+    command:
+      - "mi give MATERIAL DIAMOND %player_name% #amount# 0 100 0 silent"
+  EMERALD:
+    max_number: 250
+    regen:
+      - EMERALD_ORE;30
+      - DIAMOND_ORE;60
+      - GOLD_ORE;90
+      - IRON_ORE;120
+      - COAL_ORE;150
+      - STONE;180
+      - COBBLESTONE;210
+    time_regen: 20
+    replace: BEDROCK
+    amount: 1
+    command:
+      - "mi give MATERIAL EMERALD %player_name% #amount# 0 100 0 silent"
+  WHEAT:
+    max_number: 10
+    regen:
+      - WHEAT;5
+    time_regen: 20
+    replace: AIR
+    amount: 1
+    command:
+      - "mi give MATERIAL WHEAT %player_name% #amount# 0 100 0 silent"
+  BEETROOT:
+    max_number: 10
+    regen:
+      - BEETROOTS;5
+    time_regen: 20
+    replace: AIR
+    amount: 1
+    command:
+      - "mi give MATERIAL BEETROOT %player_name% #amount# 0 100 0 silent"
+  CARROT:
+    max_number: 10
+    regen:
+      - CARROTS;5
+    time_regen: 20
+    replace: AIR
+    amount: 1
+    command:
+      - "mi give MATERIAL CARROT %player_name% #amount# 0 100 0 silent"
+  POTATO:
+    max_number: 10
+    regen:
+      - POTATOES;5
+    time_regen: 20
+    replace: AIR
+    amount: 1
+    command:
+      - "mi give MATERIAL POTATO %player_name% #amount# 0 100 0 silent"
