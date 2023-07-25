@@ -19,6 +19,10 @@ public final class MineRegion extends JavaPlugin {
         return mineRegion;
     }
 
+    public static SimpleConfigurationManager getFileSetting() {
+        return SimpleConfigurationManager.get();
+    }
+
     @Override
     public void onLoad() {
         mineRegion = this;
@@ -65,9 +69,5 @@ public final class MineRegion extends JavaPlugin {
             location.getBlock().setType(BlockBreak.blocks.get(location));
         }
         BlockBreak.bypass.clear();
-    }
-
-    public static SimpleConfigurationManager getFileSetting() {
-        return SimpleConfigurationManager.get();
     }
 }

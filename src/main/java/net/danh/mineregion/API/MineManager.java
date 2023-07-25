@@ -10,10 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MineManager {
     private final Block block;
@@ -72,7 +70,7 @@ public class MineManager {
 
         Random random = new Random();
         int randomNum = random.nextInt(getRegenNumber()) + 1;
-        List<Integer> numbers = chance.keySet().stream().toList();
+        List<Integer> numbers = new ArrayList<>(chance.keySet());
         int nearestNumber = 0;
         int nearestDifference = Integer.MAX_VALUE;
         for (int num : numbers) {

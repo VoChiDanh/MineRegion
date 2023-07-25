@@ -34,8 +34,9 @@ public class BlockBreak implements Listener {
             if (WorldGuard.handleForLocation(p, e.getBlock().getLocation())) {
                 Material replace = Material.getMaterial(new MineManager(block).getReplaceBlock());
                 Material regen = Material.valueOf(new MineManager(block).getNextRegen());
-                if (regen != Material.AIR && !regen.isAir()) {
-                    if (block.getBlockData() instanceof Ageable ageable) {
+                if (regen != Material.AIR) {
+                    if (block.getBlockData() instanceof Ageable) {
+                        Ageable ageable = (Ageable) block.getBlockData();
                         if (ageable.getAge() == ageable.getMaximumAge()) {
                             if (!new MineManager(block).checkBreak()) {
                                 e.setCancelled(true);

@@ -26,7 +26,8 @@ public class MR extends CMDBase {
                     c.sendMessage(Chat.colorize("&8[&fMineRegion&8] &aReloaded"));
                 }
                 if (args[0].equalsIgnoreCase("bypass")) {
-                    if (c instanceof Player p) {
+                    if (c instanceof Player) {
+                        Player p = (Player) c;
                         if (BlockBreak.bypass.contains(p)) {
                             BlockBreak.bypass.remove(p);
                             p.sendMessage(Chat.colorize("&8[&fMineRegion&8] &cYou have been removed from bypass players"));

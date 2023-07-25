@@ -1,6 +1,5 @@
 package net.danh.mineregion.WorldGuard;
 
-import net.danh.mineregion.MineRegion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -41,11 +40,7 @@ public class WorldGuard {
 
     public static IWrappedFlag<WrappedState> getStateFlag(String flagName) {
         Optional<IWrappedFlag<WrappedState>> flagOptional = WorldGuardWrapper.getInstance().getFlag(flagName, WrappedState.class);
-        if (flagOptional.isEmpty() && !registered) {
-            MineRegion.getMineRegion().getLogger().log(Level.INFO, "Failed to get net.danh.mineregion.WorldGuard state flag '" + flagName + "'.");
-            MineRegion.getMineRegion().getLogger().log(Level.INFO, "net.danh.mineregion.WorldGuard state flag '" + flagName + "' is not present!");
-            return null;
-        } else if (flagOptional.isPresent() && registered) {
+        if (flagOptional.isPresent() && registered) {
             return flagOptional.get();
         } else {
             return null;
