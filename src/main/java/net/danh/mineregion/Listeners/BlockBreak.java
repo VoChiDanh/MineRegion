@@ -61,9 +61,11 @@ public class BlockBreak implements Listener {
                         }
                     }
                 } else {
-                    e.setCancelled(true);
-                    e.setDropItems(false);
-                    block.getDrops().clear();
+                    if (!p.hasPermission("mr.admin")) {
+                        e.setCancelled(true);
+                        e.setDropItems(false);
+                        block.getDrops().clear();
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 name: MineRegion
 version: '${project.version}'
 main: net.danh.mineregion.MineRegion
+description: Plugin will help you mine block in custom region and execute command when block broken by player
 api-version: '1.13'
 depend:
   - WorldGuard
