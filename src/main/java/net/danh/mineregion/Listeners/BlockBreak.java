@@ -3,6 +3,7 @@ package net.danh.mineregion.Listeners;
 import net.danh.mineregion.API.MineManager;
 import net.danh.mineregion.Utils.CooldownManager;
 import net.danh.mineregion.WorldGuard.WorldGuard;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -30,29 +31,25 @@ public class BlockBreak implements Listener {
         Player p = e.getPlayer();
         Block block = e.getBlock();
         Location location = block.getLocation();
-        if (!bypass.contains(p)) {
+        if (!bypass.contains(p) && p.getGameMode().equals(GameMode.SURVIVAL)) {
             if (WorldGuard.handleForLocation(p, e.getBlock().getLocation())) {
-                Material replace = Material.getMaterial(new MineManager(block).getReplaceBlock());
-                Material regen = Material.valueOf(new MineManager(block).getNextRegen());
-                if (regen != Material.AIR) {
-                    if (block.getBlockData() instanceof Ageable) {
-                        Ageable ageable = (Ageable) block.getBlockData();
-                        if (ageable.getAge() == ageable.getMaximumAge()) {
-                            if (!new MineManager(block).checkBreak()) {
+                if (new MineManager(block).checkBreak()) {
+                    Material regen = Material.valueOf(new MineManager(block).getNextRegen());
+                    Material replace = Material.getMaterial(new MineManager(block).getReplaceBlock());
+                    if (regen != Material.AIR) {
+                        if (block.getBlockData() instanceof Ageable) {
+                            Ageable ageable = (Ageable) block.getBlockData();
+                            if (ageable.getAge() == ageable.getMaximumAge()) {
                                 e.setCancelled(true);
-                                return;
+                                e.setDropItems(false);
+                                block.getDrops().clear();
+                                locations.add(location);
+                                blocks.put(location, regen);
+                                CooldownManager.setCooldown(location, new MineManager(block).getTimeRegen());
+                                new MineManager(block).runCommand(p);
+                                block.setType(replace != null ? replace : Material.AIR);
                             }
-                            e.setCancelled(true);
-                            e.setDropItems(false);
-                            block.getDrops().clear();
-                            locations.add(location);
-                            blocks.put(location, regen);
-                            CooldownManager.setCooldown(location, new MineManager(block).getTimeRegen());
-                            new MineManager(block).runCommand(p);
-                            block.setType(replace != null ? replace : Material.AIR);
-                        }
-                    } else {
-                        if (new MineManager(block).checkBreak()) {
+                        } else {
                             e.setCancelled(true);
                             e.setDropItems(false);
                             block.getDrops().clear();
@@ -61,10 +58,12 @@ public class BlockBreak implements Listener {
                             CooldownManager.setCooldown(location, new MineManager(block).getTimeRegen());
                             new MineManager(block).runCommand(p);
                             block.setType(replace != null ? replace : Material.BEDROCK);
-                        } else {
-                            e.setCancelled(true);
                         }
                     }
+                } else {
+                    e.setCancelled(true);
+                    e.setDropItems(false);
+                    block.getDrops().clear();
                 }
             }
         }
