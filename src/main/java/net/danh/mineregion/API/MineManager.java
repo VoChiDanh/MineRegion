@@ -54,7 +54,7 @@ public class MineManager {
     }
 
     public boolean checkBreak() {
-        return getRegenNumber() > 0;
+        return MineRegion.getFileSetting().get("config.yml").contains("block." + material.name());
     }
 
     public String getNextRegen() {
