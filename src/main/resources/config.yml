@@ -1,3 +1,5 @@
+whitelist_world:
+  - world
 block:
   COBBLESTONE:
     max_number: 70
