@@ -10,7 +10,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +25,7 @@ public class BlockBreak implements Listener {
     public static final HashMap<Location, Material> blocks = new HashMap<>();
     public static final List<Location> locations = new ArrayList<>();
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onBreak(@NotNull BlockBreakEvent e) {
         Player p = e.getPlayer();
         Block block = e.getBlock();
@@ -40,7 +39,6 @@ public class BlockBreak implements Listener {
                         if (block.getBlockData() instanceof Ageable) {
                             Ageable ageable = (Ageable) block.getBlockData();
                             if (ageable.getAge() == ageable.getMaximumAge()) {
-                                e.setCancelled(true);
                                 e.setDropItems(false);
                                 block.getDrops().clear();
                                 locations.add(location);
@@ -50,7 +48,6 @@ public class BlockBreak implements Listener {
                                 block.setType(replace != null ? replace : Material.AIR);
                             }
                         } else {
-                            e.setCancelled(true);
                             e.setDropItems(false);
                             block.getDrops().clear();
                             locations.add(location);
