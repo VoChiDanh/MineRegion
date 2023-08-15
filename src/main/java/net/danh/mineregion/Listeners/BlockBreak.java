@@ -3,6 +3,7 @@ package net.danh.mineregion.Listeners;
 import net.danh.mineregion.API.MineManager;
 import net.danh.mineregion.MineRegion;
 import net.danh.mineregion.Utils.CooldownManager;
+import net.danh.mineregion.Utils.MiningContest;
 import net.danh.mineregion.WorldGuard.WorldGuard;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -63,6 +64,7 @@ public class BlockBreak implements Listener {
                                 new MineManager(block).runCommand(p);
                                 block.setType(replace != null ? replace : Material.BEDROCK);
                             }
+                            MiningContest.addMinePoints(p, block);
                         }
                     } else {
                         if (!p.hasPermission("mr.admin")) {

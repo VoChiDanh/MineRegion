@@ -1,18 +1,22 @@
 ## Information
-This plugin will help you mine block in custom region and execute command when block broken by player (Use to give item or something else, for default file, i use mmoitems command to give item)
+
+This plugin will help you mine block in custom region and execute command when block broken by player (Use to give item
+or something else, for default file, i use mmoitems command to give item)
 
 [Want to example see video ? Click this line](https://github.com/VoChiDanh/MineRegion/assets/86956269/6c163298-f60e-4035-b5e7-891a75da007c)
 
 ## Depend
+
 - WorldGuard
 - PlaceholderAPI
 
 ## Command
+
 /mr reload - Reload file <br>
 /mr bypass - Bypass mine region and you can break/build block normal
 
-
 ## Config Explain
+
 ```
 block:
 COBBLESTONE: #Block type
@@ -28,8 +32,8 @@ command: #You can use placeholder in command, #amount# is total of setting amoun
 - "mi give MATERIAL COBBLESTONE %player_name% #amount# 0 100 0 silent"
 ```
 
-
 ## Note
+
 If you have any question/issue/suggest for new features, you should join https://discord.gg/r5ejaPSjku
 <br>
 Thanks ~~ !

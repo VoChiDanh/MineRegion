@@ -14,6 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class MineRegion extends JavaPlugin {
 
     private static MineRegion mineRegion;
+    private static boolean miningContest = false;
 
     public static MineRegion getMineRegion() {
         return mineRegion;
@@ -21,6 +22,10 @@ public final class MineRegion extends JavaPlugin {
 
     public static SimpleConfigurationManager getFileSetting() {
         return SimpleConfigurationManager.get();
+    }
+
+    public static boolean isMiningContestInstall() {
+        return miningContest;
     }
 
     @Override
@@ -31,6 +36,9 @@ public final class MineRegion extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if (getServer().getPluginManager().getPlugin("MiningContest") != null) {
+            miningContest = true;
+        }
         SimpleConfigurationManager.register(mineRegion);
         getFileSetting().build("", false, "config.yml");
         getServer().getPluginManager().registerEvents(new BlockBreak(), mineRegion);

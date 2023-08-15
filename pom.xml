@@ -126,5 +126,11 @@
             <version>1.1.7</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.VoChiDanh</groupId>
+            <artifactId>MiningContest</artifactId>
+            <version>a8f523de52</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
