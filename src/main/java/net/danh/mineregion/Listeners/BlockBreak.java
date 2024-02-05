@@ -36,7 +36,7 @@ public class BlockBreak implements Listener {
         Location location = block.getLocation();
         World world = p.getLocation().getWorld();
         if (world != null) {
-            if (!bypass.contains(p) && p.getGameMode().equals(GameMode.SURVIVAL) && MineRegion.getFileSetting().get("config.yml").getStringList("whitelist_world").contains(world.getName())) {
+            if (!bypass.contains(p) && !p.getGameMode().equals(GameMode.CREATIVE) && MineRegion.getFileSetting().get("config.yml").getStringList("whitelist_world").contains(world.getName())) {
                 if (WorldGuard.handleForLocation(p, e.getBlock().getLocation())) {
                     if (new MineManager(block).checkBreak()) {
                         Material regen = Material.valueOf(new MineManager(block).getNextRegen());
