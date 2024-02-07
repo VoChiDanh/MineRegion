@@ -1,14 +1,12 @@
 package net.danh.mineregion.Listeners;
 
+import net.danh.mineregion.API.Events.MiningEvent;
 import net.danh.mineregion.API.MineManager;
 import net.danh.mineregion.MineRegion;
 import net.danh.mineregion.Utils.CooldownManager;
 import net.danh.mineregion.Utils.MiningContest;
 import net.danh.mineregion.WorldGuard.WorldGuard;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
@@ -65,6 +63,8 @@ public class BlockBreak implements Listener {
                                 block.setType(replace != null ? replace : Material.BEDROCK);
                             }
                             MiningContest.addMinePoints(p, block);
+                            MiningEvent miningEvent = new MiningEvent(p, block);
+                            Bukkit.getPluginManager().callEvent(miningEvent);
                         }
                     } else {
                         if (!p.hasPermission("mr.admin")) {
