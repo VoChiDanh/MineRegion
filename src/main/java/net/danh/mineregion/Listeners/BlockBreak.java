@@ -50,6 +50,9 @@ public class BlockBreak implements Listener {
                                     blocks.put(location, regen);
                                     CooldownManager.setCooldown(location, new MineManager(block).getTimeRegen());
                                     new MineManager(block).runCommand(p);
+                                    MiningContest.addMinePoints(p, block);
+                                    MiningEvent miningEvent = new MiningEvent(p, block);
+                                    Bukkit.getPluginManager().callEvent(miningEvent);
                                     block.setType(replace != null ? replace : Material.AIR);
                                 }
                             } else {
@@ -60,11 +63,11 @@ public class BlockBreak implements Listener {
                                 blocks.put(location, regen);
                                 CooldownManager.setCooldown(location, new MineManager(block).getTimeRegen());
                                 new MineManager(block).runCommand(p);
+                                MiningContest.addMinePoints(p, block);
+                                MiningEvent miningEvent = new MiningEvent(p, block);
+                                Bukkit.getPluginManager().callEvent(miningEvent);
                                 block.setType(replace != null ? replace : Material.BEDROCK);
                             }
-                            MiningContest.addMinePoints(p, block);
-                            MiningEvent miningEvent = new MiningEvent(p, block);
-                            Bukkit.getPluginManager().callEvent(miningEvent);
                         }
                     } else {
                         if (!p.hasPermission("mr.admin")) {
