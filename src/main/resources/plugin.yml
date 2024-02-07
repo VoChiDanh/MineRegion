@@ -6,8 +6,6 @@ api-version: '1.13'
 depend:
   - WorldGuard
   - PlaceholderAPI
-softdepend:
-  - MiningContest
 commands:
   mr:
     description: MineRegion Command
