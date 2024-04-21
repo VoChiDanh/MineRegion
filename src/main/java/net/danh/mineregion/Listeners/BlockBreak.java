@@ -37,8 +37,8 @@ public class BlockBreak implements Listener {
             if (!bypass.contains(p) && !p.getGameMode().equals(GameMode.CREATIVE) && MineRegion.getFileSetting().get("config.yml").getStringList("whitelist_world").contains(world.getName())) {
                 if (WorldGuard.handleForLocation(p, e.getBlock().getLocation())) {
                     if (new MineManager(block).checkBreak()) {
-                        Material regen = Material.valueOf(new MineManager(block).getNextRegen());
-                        Material replace = Material.getMaterial(new MineManager(block).getReplaceBlock());
+                        Material regen = new MineManager(block).getNextRegen();
+                        Material replace = new MineManager(block).getReplaceBlock();
                         if (regen != Material.AIR) {
                             if (block.getBlockData() instanceof Ageable) {
                                 Ageable ageable = (Ageable) block.getBlockData();

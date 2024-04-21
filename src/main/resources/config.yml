@@ -1,14 +1,14 @@
 whitelist_world:
   - world
 block:
-  COBBLESTONE:
+  ITEMSADDER;COBBLESTONE:
     max_number: 70
     regen:
-      - COAL_ORE;5
-      - STONE;30
-      - COBBLESTONE;60
+      - ITEMSADDER-COAL_ORE;5
+      - ITEMSADDER-STONE;30
+      - ITEMSADDER-COBBLESTONE;60
     time_regen: 20
-    replace: BEDROCK
+    replace: ITEMSADDER-BEDROCK
     amount: 1
     command:
       - "mi give MATERIAL COBBLESTONE %player_name% #amount# 0 100 0 silent"

@@ -1,8 +1,10 @@
 package net.danh.mineregion.API;
 
+import dev.lone.itemsadder.api.CustomBlock;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.danh.mineregion.MineRegion;
 import net.danh.mineregion.Utils.Number;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
@@ -33,8 +35,10 @@ public class MineManager {
         return Number.getInteger(getBlockSetting("time_regen"));
     }
 
-    public String getReplaceBlock() {
-        return getBlockSetting("replace");
+    public Material getReplaceBlock() {
+        if (checkCustomBlock().equalsIgnoreCase("ITEMSADDER"))
+            return Objects.requireNonNull(Objects.requireNonNull(CustomBlock.getInstance(getBlockSetting("replace").split("-")[1])).getBlock()).getType();
+        return Material.valueOf(getBlockSetting("replace"));
     }
 
     public int getAmount() {
@@ -53,11 +57,22 @@ public class MineManager {
         return material;
     }
 
-    public boolean checkBreak() {
-        return MineRegion.getFileSetting().get("config.yml").contains("block." + material.name());
+    public String checkCustomBlock() {
+        if (Bukkit.getServer().getPluginManager().getPlugin("ItemsAdder") != null) {
+            if (CustomBlock.byAlreadyPlaced(block) != null) return "ITEMSADDER";
+        }
+        return "VANILLA";
     }
 
-    public String getNextRegen() {
+    public boolean checkBreak() {
+        if (checkCustomBlock().equalsIgnoreCase("VANILLA"))
+            return MineRegion.getFileSetting().get("config.yml").contains("block." + material.name());
+        else if (checkCustomBlock().equalsIgnoreCase("ITEMSADDER") && CustomBlock.byAlreadyPlaced(block) != null)
+            return MineRegion.getFileSetting().get("config.yml").contains("block.ITEMSADDER;" + Objects.requireNonNull(CustomBlock.byAlreadyPlaced(block)).getId());
+        return false;
+    }
+
+    public Material getNextRegen() {
         List<String> regenlist = getListRegen();
         Map<Integer, String> chance = new HashMap<>();
         for (String regen : regenlist) {
@@ -79,7 +94,11 @@ public class MineManager {
                 nearestDifference = difference;
             }
         }
-        return chance.get(nearestNumber);
+        String material = chance.get(nearestNumber);
+        if (checkCustomBlock().equalsIgnoreCase("ITEMSADDER")) {
+            return Objects.requireNonNull(Objects.requireNonNull(CustomBlock.getInstance(material.split("-")[1])).getBlock()).getType();
+        }
+        return Material.valueOf(material);
     }
 
     public void runCommand(Player p) {
@@ -100,10 +119,14 @@ public class MineManager {
     }
 
     public String getBlockSetting(String setting) {
+        if (checkCustomBlock().equalsIgnoreCase("ITEMSADDER") && CustomBlock.byAlreadyPlaced(block) != null)
+            return MineRegion.getFileSetting().get("config.yml").getString("block.ITEMSADDER;" + Objects.requireNonNull(CustomBlock.byAlreadyPlaced(block)).getId() + "." + setting);
         return MineRegion.getFileSetting().get("config.yml").getString("block." + material.name() + "." + setting);
     }
 
     public List<String> getBlockListSetting(String setting) {
+        if (checkCustomBlock().equalsIgnoreCase("ITEMSADDER") && CustomBlock.byAlreadyPlaced(block) != null)
+            return MineRegion.getFileSetting().get("config.yml").getStringList("block.ITEMSADDER;" + Objects.requireNonNull(CustomBlock.byAlreadyPlaced(block)).getId() + "." + setting);
         return MineRegion.getFileSetting().get("config.yml").getStringList("block." + material.name() + "." + setting);
     }
 }
