@@ -53,13 +53,13 @@ public final class MineRegion extends JavaPlugin {
                         if (Math.abs(times) > 0) {
                             CooldownManager.setCooldown(location, --times);
                             if (Math.abs(times) == 0) {
-                                Material block_type = BlockBreak.blocks.get(location);
+                                Material block_type = BlockBreak.blocks.getOrDefault(location, Material.AIR);
                                 location.getBlock().setType(block_type);
                                 BlockBreak.blocks.remove(location, block_type);
                                 BlockBreak.locations.remove(location);
                             }
                         } else {
-                            Material block_type = BlockBreak.blocks.get(location);
+                            Material block_type = BlockBreak.blocks.getOrDefault(location, Material.AIR);
                             location.getBlock().setType(block_type);
                             BlockBreak.blocks.remove(location, block_type);
                             BlockBreak.locations.remove(location);
